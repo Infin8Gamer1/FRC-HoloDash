@@ -22,6 +22,7 @@ Command | Description
 --- | :---:
 HUD Up | Moves the hud up in the world space
 HUD Down | Moves the hud down in the world space
+Help | Lists off all of the available voice commands
 
 ---
 *Please Note that this project is still in heavy development.*
