@@ -1,4 +1,4 @@
-# FRC-HoloDash-2019
+# FRC HoloDash
 
 A hololens project to show a HUD while driving an FRC robot.
 
