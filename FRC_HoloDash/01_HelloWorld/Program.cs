@@ -21,8 +21,6 @@ namespace FRC_HoloDash
 
 	public class HoloDashApp : StereoApplication
 	{
-		public int TeamNumber = 4089;
-
 		Node HUDNode;
 
 		// For HL optical stabilization (optional)

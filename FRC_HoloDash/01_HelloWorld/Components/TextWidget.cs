@@ -8,7 +8,7 @@ using Urho.Gui;
 using Urho.Physics;
 using Urho.Resources;
 using NetworkTables;
-using NetworkTables.Tables;
+using FRC_HoloDash.USB_Comms;
 
 namespace FRC_HoloDash
 {
@@ -40,22 +40,20 @@ namespace FRC_HoloDash
 		{
 			base.OnUpdate(timeStep);
 
-			NetworkTable table = NetworkTable.GetTable("/" + Table);
-
-			string value = "ERROR";
+			string value = "Error Type Not Implemented";
 
 			switch (ValueType)
 			{
 				case NtType.Unassigned:
 					break;
 				case NtType.Boolean:
-					value = table.GetBoolean(Key, false).ToString();
+					value = UsbCOMS.Instance.GetBoolean(Key).ToString();
 					break;
 				case NtType.Double:
-					value = table.GetNumber(Key, -9999.9999).ToString();
+					value = UsbCOMS.Instance.GetNumber(Key).ToString();
 					break;
 				case NtType.String:
-					value = table.GetString(Key, "Key Not Found");
+					value = UsbCOMS.Instance.GetString(Key);
 					break;
 				case NtType.Raw:
 					break;
