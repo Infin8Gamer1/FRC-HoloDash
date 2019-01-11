@@ -6,7 +6,6 @@ using Urho.SharpReality;
 using Urho.Shapes;
 using Urho.Gui;
 using System.Collections.Generic;
-using NetworkTables;
 using System.Net;
 using Windows.Networking;
 
@@ -35,25 +34,6 @@ namespace FRC_HoloDash
 		{
 			//base.Start() creates a basic scene
 			base.Start();
-
-			
-
-			//set up Network Tables
-			NetworkTable.SetClientMode();
-
-			//NetworkTable.SetTeam(TeamNumber);
-			NetworkTable.SetIPAddress("10.40.89.2");
-			NetworkTable.SetPort(NetworkTable.DefaultPort);
-
-			NetworkTable.SetUpdateRate(0.1);
-			//NetworkTable.SetDSClientEnabled(true);
-			NetworkTable.SetNetworkIdentity(TeamNumber.ToString() + " Hololens");
-
-			NetworkTable.Initialize();
-
-			bool result = NetworkTable.GetTable("").PutString("PutTest", "this is a test to see if we can put data");
-
-			NetworkTree tree = new NetworkTree("");
 
 			//register cortana commands
 			await RegisterCortanaCommands(new Dictionary<string, Action> {
@@ -103,9 +83,6 @@ namespace FRC_HoloDash
 		protected override void Stop()
 		{
 			base.Stop();
-
-			//stop the network tables
-			NetworkTable.Shutdown();
 		}
 	}
 }

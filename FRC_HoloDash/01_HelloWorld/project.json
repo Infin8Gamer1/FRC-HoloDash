@@ -1,6 +1,5 @@
 ﻿{
   "dependencies": {
-    "FRC.NetworkTables": "3.1.8",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.*",
     "UrhoSharp.SharpReality": "1.8.71"
   },
