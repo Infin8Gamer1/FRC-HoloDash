@@ -5,18 +5,32 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRC HoloDash", "01_HelloWorld\FRC HoloDash.csproj", "{CB6C6931-42F8-4962-9355-05970F06C84F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRC HoloServer", "FRC HoloServer\FRC HoloServer.csproj", "{06C89893-CED9-4304-8755-9AA72DA7D5F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CB6C6931-42F8-4962-9355-05970F06C84F}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{CB6C6931-42F8-4962-9355-05970F06C84F}.Debug|x86.ActiveCfg = Debug|x86
 		{CB6C6931-42F8-4962-9355-05970F06C84F}.Debug|x86.Build.0 = Debug|x86
 		{CB6C6931-42F8-4962-9355-05970F06C84F}.Debug|x86.Deploy.0 = Debug|x86
+		{CB6C6931-42F8-4962-9355-05970F06C84F}.Release|Any CPU.ActiveCfg = Release|x86
 		{CB6C6931-42F8-4962-9355-05970F06C84F}.Release|x86.ActiveCfg = Release|x86
 		{CB6C6931-42F8-4962-9355-05970F06C84F}.Release|x86.Build.0 = Release|x86
 		{CB6C6931-42F8-4962-9355-05970F06C84F}.Release|x86.Deploy.0 = Release|x86
+		{06C89893-CED9-4304-8755-9AA72DA7D5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06C89893-CED9-4304-8755-9AA72DA7D5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06C89893-CED9-4304-8755-9AA72DA7D5F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{06C89893-CED9-4304-8755-9AA72DA7D5F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{06C89893-CED9-4304-8755-9AA72DA7D5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06C89893-CED9-4304-8755-9AA72DA7D5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06C89893-CED9-4304-8755-9AA72DA7D5F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{06C89893-CED9-4304-8755-9AA72DA7D5F9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
