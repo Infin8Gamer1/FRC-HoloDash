@@ -27,5 +27,10 @@
     <uap:Capability Name="picturesLibrary" />
     <uap2:Capability Name="spatialPerception" />
     <DeviceCapability Name="microphone" />
+	<DeviceCapability Name="serialcommunication">
+		<Device Id="any">
+			<Function Type="name:serialPort"/>
+		</Device>
+	</DeviceCapability>
   </Capabilities>
 </Package>
