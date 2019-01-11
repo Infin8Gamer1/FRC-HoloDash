@@ -17,12 +17,12 @@ namespace FRC_HoloDash
 
 			if (TestingMode)
 			{
-				Widget widget = new Widget(WidgetType.Text, -2.2f, 0)
+				Widget widget = new Widget(WidgetType.Text, -2f, 0)
 				{
 					NtType = NetworkTables.NtType.String,
-					NetworkKey = "Test",
+					NetworkKey = "Testing",
 					NetworkTable = "",
-					Label = "Test"
+					Label = "Testing"
 				};
 
 				widgets.Add(widget);
