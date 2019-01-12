@@ -24,7 +24,7 @@ HUD Up | Moves the hud up in the world space
 HUD Down | Moves the hud down in the world space
 HUD Push | Moves the hud further away
 HUD Pull | Moves the hud closer
-Toggle Tag Along | toggles weither the hud follows and rotates to be in the users field of view
+Toggle Tag Along | toggles if the HUD follows/rotates to stay in the users field of view
 Help | Lists off all of the available voice commands
 
 ---
