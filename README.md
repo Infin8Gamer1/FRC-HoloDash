@@ -2,7 +2,7 @@
 
 A hololens project to show a HUD while driving an FRC robot.
 
-<img src="https://github.com/Infin8Gamer1/FRC-HoloDash-2019_UrhoSharp/blob/master/FRC_HoloDash/01_HelloWorld/Data/Textures/cropped-Stealth-Logo.png" alt="drawing" width="250"/>
+<img src="https://github.com/Infin8Gamer1/FRC-HoloDash-2019_UrhoSharp/blob/master/FRC_HoloDash/Hololens App/Data/Textures/cropped-Stealth-Logo.png" alt="drawing" width="250"/>
 
 ## Features
 - Modular Widget Design
