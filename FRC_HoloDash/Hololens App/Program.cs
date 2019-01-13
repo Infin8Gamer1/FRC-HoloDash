@@ -71,14 +71,29 @@ namespace FRC_HoloDash
 			HUDNode.GetComponent<TagAlong>().HeightPosition -= 0.1f;
 		}
 
-		void HUDPush()
+		async void HUDPush()
 		{
-			HUDNode.GetComponent<TagAlong>().PositionOffset += 0.2f;
+			bool enabled = HUDNode.GetComponent<TagAlong>().TagAlongEnabled;
+
+			if (enabled)
+			{
+				HUDNode.GetComponent<TagAlong>().PositionOffset += 0.2f;
+			} else {
+				await TextToSpeech("Only available when HUD Tag Along is enabled");
+			}
+			
 		}
 
-		void HUDPull()
+		async void HUDPull()
 		{
-			HUDNode.GetComponent<TagAlong>().PositionOffset -= 0.2f;
+			bool enabled = HUDNode.GetComponent<TagAlong>().TagAlongEnabled;
+
+			if (enabled)
+			{
+				HUDNode.GetComponent<TagAlong>().PositionOffset -= 0.2f;
+			} else {
+				await TextToSpeech("Only available when HUD Tag Along is enabled");
+			}
 		}
 
 		async void ToggleTagAlong()

@@ -11,15 +11,37 @@ namespace FRC_HoloDash
 
 			if (TestingMode)
 			{
-				Widget widget = new Widget(WidgetType.Text, -2f, 0)
+				#region TextWidgets
+				Widget stringTextWidget = new Widget(WidgetType.Text, -2f, 0)
 				{
 					ntType = NtType.String,
-					NetworkKey = "Testing",
+					NetworkKey = "TestingString",
 					NetworkTable = "",
-					Label = "Testing"
+					Label = "String :"
 				};
 
-				widgets.Add(widget);
+				widgets.Add(stringTextWidget);
+
+				Widget numberTextWidget = new Widget(WidgetType.Text, 0, 0)
+				{
+					ntType = NtType.Double,
+					NetworkKey = "TestingDouble",
+					NetworkTable = "",
+					Label = "Double :"
+				};
+
+				widgets.Add(numberTextWidget);
+
+				Widget boolTextWidget = new Widget(WidgetType.Text, 2f, 0)
+				{
+					ntType = NtType.Boolean,
+					NetworkKey = "TestingBoolean",
+					NetworkTable = "",
+					Label = "Boolean :"
+				};
+
+				widgets.Add(boolTextWidget);
+				#endregion TextWidgets
 			}
 		}
 	}

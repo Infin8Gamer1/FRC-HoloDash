@@ -14,7 +14,7 @@ namespace FRC_HoloDash
 	{
 		public bool TagAlongEnabled = true;
 		public float HeightPosition = 0;
-		public float PositionOffset = 1.25f;
+		public float PositionOffset = 1.5f;
 		public Node LeftCamera;
 
 		// Constructor needed for deserialization 
