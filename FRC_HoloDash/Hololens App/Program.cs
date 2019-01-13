@@ -38,7 +38,9 @@ namespace FRC_HoloDash
 					{"Hud Down", HUDDown },
 					{"Hud Push", HUDPush },
 					{"Hud Pull", HUDPull },
-					{"Toggle Tag Along", ToggleTagAlong }
+					{"Toggle Tag Along", ToggleTagAlong },
+					{"Enable Tag Along", EnableTagAlong },
+					{"Disable Tag Along", DisableTagAlong }
 				});
 
 			// Create a node for the Hud
@@ -91,6 +93,18 @@ namespace FRC_HoloDash
 				HUDNode.GetComponent<TagAlong>().TagAlongEnabled = true;
 				await TextToSpeech("Tag Along Enabled");
 			}
+		}
+
+		async void EnableTagAlong()
+		{
+			HUDNode.GetComponent<TagAlong>().TagAlongEnabled = true;
+			await TextToSpeech("Tag Along Enabled");
+		}
+
+		async void DisableTagAlong()
+		{
+			HUDNode.GetComponent<TagAlong>().TagAlongEnabled = false;
+			await TextToSpeech("Tag Along Disabled");
 		}
 
 		#endregion Cortana Commands

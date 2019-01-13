@@ -7,8 +7,6 @@ using Urho;
 using Urho.Gui;
 using Urho.Physics;
 using Urho.Resources;
-using NetworkTables;
-using FRC_HoloDash.USB_Comms;
 
 namespace FRC_HoloDash
 {
@@ -47,13 +45,13 @@ namespace FRC_HoloDash
 				case NtType.Unassigned:
 					break;
 				case NtType.Boolean:
-					value = UsbCOMS.Instance.GetBoolean(Key).ToString();
+					value = "Boolean";//UsbCOMS.Instance.GetBoolean(Key).ToString();
 					break;
 				case NtType.Double:
-					value = UsbCOMS.Instance.GetNumber(Key).ToString();
+					value = "Double";//UsbCOMS.Instance.GetNumber(Key).ToString();
 					break;
 				case NtType.String:
-					value = UsbCOMS.Instance.GetString(Key);
+					value = "String";//UsbCOMS.Instance.GetString(Key);
 					break;
 				case NtType.Raw:
 					break;
