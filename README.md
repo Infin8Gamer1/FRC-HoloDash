@@ -25,6 +25,8 @@ HUD Down | Moves the hud down in the world space
 HUD Push | Moves the hud further away (only works when Tag Along is enabled)
 HUD Pull | Moves the hud closer (only works when Tag Along is enabled)
 Toggle Tag Along | Toggles if the HUD follows/rotates to stay in the users field of view
+Enable Tag Along | Enables Tag Along
+Disable Tag Along | Disables Tag Along
 Help | Lists off all of the available voice commands
 
 ---
