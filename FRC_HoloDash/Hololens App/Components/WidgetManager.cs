@@ -23,14 +23,14 @@ namespace FRC_HoloDash
 		// user defined properties (managed state): 
 		public WidgetGrid Grid { get; set; }
 
-		public override void OnSerialize(IComponentSerializer ser) {
+		/*public override void OnSerialize(IComponentSerializer ser) {
 			// register our properties with their names as keys using nameof()
 			ser.Serialize(nameof(Grid), Grid);
 		}
 
 		public override void OnDeserialize(IComponentDeserializer des) {
 			Grid = des.Deserialize<WidgetGrid>(nameof(Grid));
-		}
+		}*/
 
 		//called when the component is attached to some node
 		public override void OnAttachedToNode(Node _node) {
@@ -80,7 +80,7 @@ namespace FRC_HoloDash
 					//Text Widget Display
 					TextWidget textWidget = widgetNode.CreateComponent<TextWidget>();
 					textWidget.Text = text;
-					textWidget.ValueType = widget.NtType;
+					textWidget.ValueType = widget.ntType;
 					textWidget.Table = widget.NetworkTable;
 					textWidget.Key = widget.NetworkKey;
 					textWidget.Label = widget.Label;

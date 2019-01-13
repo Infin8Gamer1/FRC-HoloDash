@@ -12,8 +12,9 @@ namespace FRC_HoloDash
 {
 	class TagAlong : Component
 	{
-		public float PositionOffset = 1.25f;
+		public bool TagAlongEnabled = true;
 		public float HeightPosition = 0;
+		public float PositionOffset = 1.25f;
 		public Node LeftCamera;
 
 		// Constructor needed for deserialization 
@@ -33,15 +34,21 @@ namespace FRC_HoloDash
 		{
 			base.OnUpdate(timeStep);
 
-			double angle = LeftCamera.WorldRotation.YawAngle * (Math.PI/180);
+			if (TagAlongEnabled)
+			{
+				double angle = LeftCamera.WorldRotation.YawAngle * (Math.PI / 180);
 
-			Vector3 newPos = LeftCamera.WorldPosition + new Vector3((PositionOffset * (float)Math.Sin(angle)), 0,(PositionOffset * (float)Math.Cos(angle)));
-			newPos.Y = HeightPosition;
+				Vector3 newPos = LeftCamera.WorldPosition + new Vector3((PositionOffset * (float)Math.Sin(angle)), HeightPosition, (PositionOffset * (float)Math.Cos(angle)));
 
-			Node.Rotation = new Quaternion(0, LeftCamera.WorldRotation.YawAngle, 0);
-			Node.Position = newPos;
+				Node.Rotation = new Quaternion(0, LeftCamera.WorldRotation.YawAngle, 0);
+				Node.Position = newPos;
+			} else {
+				Vector3 newPos = Node.Position;
+				newPos.Y = HeightPosition;
+
+				Node.Position = newPos;
+			}
 		}
-
 
 		//delete method
 		protected override void OnDeleted()

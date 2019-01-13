@@ -6,8 +6,6 @@ using Urho.SharpReality;
 using Urho.Shapes;
 using Urho.Gui;
 using System.Collections.Generic;
-using System.Net;
-using Windows.Networking;
 
 namespace FRC_HoloDash
 {
@@ -37,19 +35,20 @@ namespace FRC_HoloDash
 			await RegisterCortanaCommands(new Dictionary<string, Action> {
 					{"Help", Help },
 					{"Hud Up", HUDUp },
-					{"Hud Down", HUDDown }
+					{"Hud Down", HUDDown },
+					{"Hud Push", HUDPush },
+					{"Hud Pull", HUDPull },
+					{"Toggle Tag Along", ToggleTagAlong }
 				});
 
 			// Create a node for the Hud
 			HUDNode = Scene.CreateChild();
-			HUDNode.Position = new Vector3(0, 0, 1); // One meter away from the center
+			//HUDNode.Position = new Vector3(0, 0, 1); // One meter away from the center
 
 			HUDNode.CreateComponent<WidgetManager>();
 
 			TagAlong tagAlong = HUDNode.CreateComponent<TagAlong>();
 			tagAlong.LeftCamera = LeftCamera.Node;
-
-			
 		}
 
 		#region Cortana Commands
@@ -68,6 +67,30 @@ namespace FRC_HoloDash
 		void HUDDown()
 		{
 			HUDNode.GetComponent<TagAlong>().HeightPosition -= 0.1f;
+		}
+
+		void HUDPush()
+		{
+			HUDNode.GetComponent<TagAlong>().PositionOffset += 0.2f;
+		}
+
+		void HUDPull()
+		{
+			HUDNode.GetComponent<TagAlong>().PositionOffset -= 0.2f;
+		}
+
+		async void ToggleTagAlong()
+		{
+			bool enabled = HUDNode.GetComponent<TagAlong>().TagAlongEnabled;
+
+			if(enabled == true)
+			{
+				HUDNode.GetComponent<TagAlong>().TagAlongEnabled = false;
+				await TextToSpeech("Tag Along Disabled");
+			} else {
+				HUDNode.GetComponent<TagAlong>().TagAlongEnabled = true;
+				await TextToSpeech("Tag Along Enabled");
+			}
 		}
 
 		#endregion Cortana Commands
