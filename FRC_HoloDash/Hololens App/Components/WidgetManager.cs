@@ -59,12 +59,12 @@ namespace FRC_HoloDash
 
 			//Background Plane
 			Node backgroundPlaneNode = widgetNode.CreateChild();
-			backgroundPlaneNode.Scale = new Vector3(2f, 1f, 1f);
+			backgroundPlaneNode.Scale = new Vector3(1.9f, 1f, 1f);
 			backgroundPlaneNode.Rotation = new Quaternion(-90, 0, 0);
 			backgroundPlaneNode.Position += new Vector3(0, 0, 0.05f);
 
 			Urho.Shapes.Plane plane = backgroundPlaneNode.CreateComponent<Urho.Shapes.Plane>();
-			plane.SetMaterial(Material.FromColor(new Color(0.6f, 0.6f, 0.6f, 0.7f)));
+			plane.SetMaterial(Material.FromColor(new Color(0.6f, 0.6f, 0.6f, 0.5f)));
 
 			switch (widget.type)
 			{
