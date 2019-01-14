@@ -24,7 +24,7 @@ namespace FRC_HoloServer
 			Test();
 		}
 
-		public static void Test()
+		public static async void Test()
 		{
 			NetworkTree tree = new NetworkTree("");
 
@@ -32,12 +32,12 @@ namespace FRC_HoloServer
 
 			//NetworkTree myTree = JsonConvert.DeserializeObject<NetworkTree>(myJson);
 
-			/*using (var client = new HttpClient())
+			using (var client = new HttpClient())
 			{
 				var response = await client.PostAsync(
 					"http://localhost:4089/",
 					 new StringContent(myJson, Encoding.UTF8, "application/json"));
-			}*/
+			}
 		}
 	}
 }

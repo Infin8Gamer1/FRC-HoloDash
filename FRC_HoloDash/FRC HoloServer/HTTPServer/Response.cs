@@ -55,6 +55,9 @@ namespace FRC_HoloServer.Server
 					return MakeMsgRequest("404.html", "404 Page Not Found");
 				}
 
+			} else if (request.Type == "POST")
+			{
+				return null;
 			} else {
 				return MakeMsgRequest("405.html", "405 Method Not Allowed");
 			}
