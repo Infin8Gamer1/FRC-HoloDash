@@ -19,7 +19,7 @@ namespace FRC_HoloServer
 		{
 			NetworkTable.SetClientMode();
 			if (team == 0)
-				NetworkTable.SetIPAddress("127.0.0.1");
+				NetworkTable.SetIPAddress("localhost");
 			else
 				NetworkTable.SetTeam(team);
 			NetworkTable.SetUpdateRate(0.1);
