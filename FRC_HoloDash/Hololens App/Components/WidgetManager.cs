@@ -7,7 +7,7 @@ using Urho;
 using Urho.Gui;
 using Urho.Resources;
 
-namespace FRC_HoloDash
+namespace FRC_HoloServer
 {
 	class WidgetManager : Component
 	{

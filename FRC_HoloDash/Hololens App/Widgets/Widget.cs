@@ -1,6 +1,6 @@
 ﻿
 
-namespace FRC_HoloDash
+namespace FRC_HoloServer
 {
 
 	public struct Widget

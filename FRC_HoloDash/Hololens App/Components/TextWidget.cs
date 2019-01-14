@@ -8,7 +8,7 @@ using Urho.Gui;
 using Urho.Physics;
 using Urho.Resources;
 
-namespace FRC_HoloDash
+namespace FRC_HoloServer
 {
 	class TextWidget : Component
 	{

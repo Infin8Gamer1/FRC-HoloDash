@@ -7,7 +7,7 @@ using Urho.Shapes;
 using Urho.Gui;
 using System.Collections.Generic;
 
-namespace FRC_HoloDash
+namespace FRC_HoloServer
 {
 	internal class Program
 	{

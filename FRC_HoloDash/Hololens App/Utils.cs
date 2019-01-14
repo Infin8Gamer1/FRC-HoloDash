@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FRC_HoloDash
+namespace FRC_HoloServer
 {
 	static class Utils
 	{
