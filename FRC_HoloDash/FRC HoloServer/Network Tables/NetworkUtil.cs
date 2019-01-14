@@ -11,6 +11,24 @@ namespace FRC_HoloServer
 	public static class NetworkUtil
 	{
 		/// <summary>
+		/// Used to Initilize the network tables
+		/// </summary>
+		/// <param name="team">pass 0 to use localhost</param>
+		/// <param name="useDriverStation"></param>
+		public static void InitNetworkTable(int team, bool useDriverStation = true)
+		{
+			NetworkTable.SetClientMode();
+			if (team == 0)
+				NetworkTable.SetIPAddress("127.0.0.1");
+			else
+				NetworkTable.SetTeam(team);
+			NetworkTable.SetUpdateRate(0.1);
+			NetworkTable.SetDSClientEnabled(useDriverStation);
+			NetworkTable.SetNetworkIdentity("HoloDash");
+			NetworkTable.Initialize();
+		}
+
+		/// <summary>
 		/// The SmartDashboard network table path
 		/// </summary>
 		public static NetworkTable SmartDashboard {
