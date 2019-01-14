@@ -1,6 +1,7 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.*",
+    "Newtonsoft.Json": "12.0.1",
     "UrhoSharp.SharpReality": "1.8.71"
   },
   "frameworks": {

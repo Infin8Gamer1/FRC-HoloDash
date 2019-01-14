@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace FRC_HoloDash
+namespace FRC_HoloServer
 {
 	public static class NetworkUtil
 	{

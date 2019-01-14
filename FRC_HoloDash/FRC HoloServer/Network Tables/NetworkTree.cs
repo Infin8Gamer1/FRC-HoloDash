@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using NetworkTables;
 using NetworkTables.Tables;
+using Newtonsoft.Json;
 
-namespace FRC_HoloDash
+namespace FRC_HoloServer
 {
 	/// <summary>
 	/// Represents an entry in the network table without needing its value
@@ -16,20 +17,26 @@ namespace FRC_HoloDash
 		/// <summary>
 		/// The name of the entry
 		/// </summary>
-		public readonly string Name;
+		public string Name;
 		/// <summary>
 		/// The type of the entry. Can be a primitive type or NetworkTable
 		/// </summary>
-		public readonly Type Type;
-		internal NetworkElement(string name, Type type)
+		public Type Type;
+		/// <summary>
+		/// The Value of the entry
+		/// </summary>
+		public object Value;
+
+		internal NetworkElement(string name, Type type, object value)
 		{
 			Name = name;
 			Type = type;
+			Value = value;
 		}
 
 		public override string ToString()
 		{
-			return $"{Name} ({Type.Name})";
+			return $"{Name} (Type: {Type.Name}) (Value: {Value.ToString()})";
 		}
 	}
 
@@ -39,32 +46,28 @@ namespace FRC_HoloDash
 	/// </summary>
 	public class NetworkTree : NetworkElement
 	{
-		private List<NetworkElement> children;
 		/// <summary>
 		/// All values and subtrees belonging to this subtable
 		/// </summary>
-		public IList<NetworkElement> Children {
-			get {
-				return children.AsReadOnly();
-			}
-		}
-		internal NetworkTree(string root, ITable baseTree = null) : base(root, typeof(NetworkTree))
+		public List<NetworkElement> Children;
+
+		internal NetworkTree(string root, ITable baseTree = null) : base(root, typeof(NetworkTree), null)
 		{
 			ConstructChildren(root, baseTree);
 		}
 
 		private void ConstructChildren(string root, ITable baseTree)
 		{
-			children = new List<NetworkElement>();
+			Children = new List<NetworkElement>();
 			ITable table = baseTree?.GetSubTable(root) ?? NetworkTable.GetTable(root);
 			foreach (string key in table.GetKeys())
 			{
-				children.Add(new NetworkElement(key, NetworkUtil.TypeOf(table.GetValue(key, null))));
+				Children.Add(new NetworkElement(key, NetworkUtil.TypeOf(table.GetValue(key, null)), NetworkUtil.ReadValue(table.GetValue(key, null))));
 			}
 			foreach (string key in table.GetSubTables())
 			{
 				//ok being recursive, network tables usually stay fairly small
-				children.Add(new NetworkTree(key, table));
+				Children.Add(new NetworkTree(key, table));
 			}
 		}
 	}

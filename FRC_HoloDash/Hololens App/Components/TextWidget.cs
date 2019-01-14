@@ -45,13 +45,13 @@ namespace FRC_HoloDash
 				case NtType.Unassigned:
 					break;
 				case NtType.Boolean:
-					value = "Boolean";//UsbCOMS.Instance.GetBoolean(Key).ToString();
+					value = "Boolean";
 					break;
 				case NtType.Double:
-					value = "Double";//UsbCOMS.Instance.GetNumber(Key).ToString();
+					value = "Double";
 					break;
 				case NtType.String:
-					value = "String";//UsbCOMS.Instance.GetString(Key);
+					value = "String";
 					break;
 				case NtType.Raw:
 					break;
