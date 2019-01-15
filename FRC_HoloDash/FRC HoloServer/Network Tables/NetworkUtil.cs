@@ -1,4 +1,5 @@
 ﻿using NetworkTables;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,15 @@ namespace FRC_HoloServer
 			NetworkTable.SetDSClientEnabled(useDriverStation);
 			NetworkTable.SetNetworkIdentity("HoloDash");
 			NetworkTable.Initialize();
+		}
+
+		public static string ConvertTableToJSON()
+		{
+			NetworkTree tree = new NetworkTree("");
+
+			string myJson = JsonConvert.SerializeObject(tree);
+
+			return myJson;
 		}
 
 		/// <summary>

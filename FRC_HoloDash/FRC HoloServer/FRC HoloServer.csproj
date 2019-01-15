@@ -65,13 +65,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HTTPServer\HTTPServer.cs" />
+    <Compile Include="HTTPServer\WebServer.cs" />
     <Compile Include="Network Tables\NetworkTree.cs" />
     <Compile Include="Network Tables\NetworkUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HTTPServer\Request.cs" />
-    <Compile Include="HTTPServer\Response.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
