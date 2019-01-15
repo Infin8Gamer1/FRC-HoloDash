@@ -9,15 +9,13 @@ using Newtonsoft.Json;
 
 namespace FRC_HoloServer
 {
-	/// <summary>
-	/// Represents an entry in the network table without needing its value
-	/// </summary>
+	
 	public class NetworkElement
 	{
 		/// <summary>
 		/// The name of the entry
 		/// </summary>
-		public string Name;
+		public string Key;
 		/// <summary>
 		/// The type of the entry. Can be a primitive type or NetworkTable
 		/// </summary>
@@ -26,49 +24,82 @@ namespace FRC_HoloServer
 		/// The Value of the entry
 		/// </summary>
 		public object Value;
-
-		internal NetworkElement(string name, Type type, object value)
-		{
-			Name = name;
-			Type = type;
-			Value = value;
-		}
-
-		public override string ToString()
-		{
-			return $"{Name} (Type: {Type.Name}) (Value: {Value.ToString()})";
-		}
-	}
-
-
-	/// <summary>
-	/// Represents a network table's contents as a tree structure
-	/// </summary>
-	public class NetworkTree : NetworkElement
-	{
 		/// <summary>
-		/// All values and subtrees belonging to this subtable
+		/// The Children of this node
 		/// </summary>
 		public List<NetworkElement> Children;
 
-		internal NetworkTree(string root, ITable baseTree = null) : base(root, typeof(NetworkTree), null)
+		[JsonConstructor]
+		public NetworkElement(string Key, Type Type, object Value, List<NetworkElement> Children)
 		{
+			this.Key = Key;
+			this.Type = Type;
+			this.Value = Value;
+			this.Children = Children;
+		}
+
+		/// <summary>
+		/// used to make a complete tree of the tables
+		/// </summary>
+		public NetworkElement()
+		{
+			ConstructChildren();
+		}
+
+		private NetworkElement(string Key, Type Type, object Value)
+		{
+			this.Key = Key;
+			this.Type = Type;
+			this.Value = Value;
+			this.Children = new List<NetworkElement>();
+		}
+
+		private NetworkElement(string root, ITable baseTree)
+		{
+			this.Key = root;
+
 			ConstructChildren(root, baseTree);
 		}
 
-		private void ConstructChildren(string root, ITable baseTree)
+		private void ConstructChildren(string root = "", ITable baseTree = null)
 		{
 			Children = new List<NetworkElement>();
 			ITable table = baseTree?.GetSubTable(root) ?? NetworkTable.GetTable(root);
+
 			foreach (string key in table.GetKeys())
 			{
 				Children.Add(new NetworkElement(key, NetworkUtil.TypeOf(table.GetValue(key, null)), NetworkUtil.ReadValue(table.GetValue(key, null))));
 			}
+
 			foreach (string key in table.GetSubTables())
 			{
 				//ok being recursive, network tables usually stay fairly small
-				Children.Add(new NetworkTree(key, table));
+				Children.Add(new NetworkElement(key, table));
 			}
+		}
+
+		public override string ToString()
+		{
+			return $"{Key} (Type: {Type?.Name}) (Value: {Value?.ToString()}) (Children: {Children?.Count})";
+		}
+
+		public void PrintTable(int level = 0)
+		{
+			Console.WriteLine($"Level = {level}");
+			Console.WriteLine("----------------------------");
+
+			foreach (NetworkElement element in this.Children)
+			{
+				Console.WriteLine(element.ToString());
+
+				if(element.Children.Count > 0)
+				{
+					int nextLevel = level + 1;
+					element.PrintTable(nextLevel);
+				}
+			}
+
+			Console.WriteLine("----------------------------");
 		}
 	}
 }

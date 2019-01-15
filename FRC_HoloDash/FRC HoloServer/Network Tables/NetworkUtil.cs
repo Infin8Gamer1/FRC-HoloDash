@@ -31,7 +31,7 @@ namespace FRC_HoloServer
 
 		public static string ConvertTableToJSON()
 		{
-			NetworkTree tree = new NetworkTree("");
+			NetworkElement tree = new NetworkElement();
 
 			string myJson = JsonConvert.SerializeObject(tree);
 
@@ -103,15 +103,6 @@ namespace FRC_HoloServer
 		}
 
 		/// <summary>
-		/// Gets a full outline of the existing network tables
-		/// </summary>
-		/// <param name="root">The first level to search at, defaults to root</param>
-		public static NetworkTree GetTableOutline(string root = "")
-		{
-			return new NetworkTree(root);
-		}
-
-		/// <summary>
 		/// Gets the URL of the MJPEG stream for the specified camera resource
 		/// </summary>
 		/// <param name="cameraName">The name of the camera, usually from GetCameras()</param>
@@ -132,20 +123,20 @@ namespace FRC_HoloServer
 			return null;
 		}
 
-		/// <summary>
+		/*/// <summary>
 		/// Gets the names of all cameras attached to the robot
 		/// </summary>
 		/// <returns>A collection of camera names, or an empty collection if the robot has no cameras or is disconnected</returns>
 		public static IEnumerable<string> GetCameras()
 		{
-			NetworkTree network = GetTableOutline("CameraPublisher");
+			NetworkTable network = GetTableOutline("CameraPublisher");
 			foreach (NetworkElement elm in network.Children)
 			{
 				if (elm.Type == typeof(NetworkTree))
 				{
-					yield return elm.Name;
+					yield return elm.Key;
 				}
 			}
-		}
+		}*/
 	}
 }

@@ -40,7 +40,11 @@ namespace FRC_HoloServer
 			response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
 
-			Console.WriteLine(responseBody);
+			Console.WriteLine(responseBody + "\n\n");
+
+			NetworkElement tree = JsonConvert.DeserializeObject<NetworkElement>(responseBody);
+
+			tree.PrintTable();
 		}
 	}
 }
