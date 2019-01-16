@@ -8,12 +8,20 @@ using System.Threading.Tasks;
 
 namespace FRC_Holo.API
 {
-	public static class NetworkUtil
+	public class NetworkUtil
 	{
+		private NetworkElement tree;
 
-		public static NetworkElement ConvertJSONToNetworkElement(string json)
+		public void LoadNetworkFromJSON(string json)
 		{
-			return JsonConvert.DeserializeObject<NetworkElement>(json);
+			tree = JsonConvert.DeserializeObject<NetworkElement>(json);
+		}
+
+		public object GetKey(string key)
+		{
+			string[] tokens = key.Split('/');
+
+			return null;
 		}
 	}
 }
