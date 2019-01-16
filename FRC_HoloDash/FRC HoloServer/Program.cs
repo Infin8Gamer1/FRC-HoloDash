@@ -39,11 +39,15 @@ namespace FRC_HoloServer
 			response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
 
-			Console.WriteLine(responseBody + "\n\n");
+			Console.WriteLine("\n");
 
 			NetworkElement tree = NetworkUtil.ConvertJSONToNetworkElement(responseBody);
 
 			tree.PrintTable();
+
+			object result = NetworkUtil.GetKey("TestRoot", tree);
+
+			Console.WriteLine("Get Key Result: " + result.ToString());
 		}
 	}
 }

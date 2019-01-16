@@ -29,6 +29,32 @@ namespace FRC_Holo.API
 			NetworkTable.Initialize();
 		}
 
+		public static object GetKey(string inputKey, NetworkElement tree)
+		{
+			string[] tokens = inputKey.Split('/');
+
+			NetworkElement myElement = tree;
+			int x = 0;
+
+			while (myElement.Key != tokens.Last())
+			{
+				var matches = myElement.Children.Where(ntItem => ntItem.Key == tokens[x]);
+				if (matches.Count() > 0 && matches.First() != null)
+				{
+					myElement = matches.First();
+				}
+				else
+				{
+					throw new Exception($"Key {tokens[x]} Not Found!");
+				}
+
+				x++;
+
+			}
+
+			return myElement.Value;
+		}
+
 		public static string ConvertTableToJSON()
 		{
 			NetworkElement tree = new NetworkElement();

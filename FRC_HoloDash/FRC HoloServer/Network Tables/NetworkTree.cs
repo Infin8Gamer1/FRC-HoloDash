@@ -97,7 +97,12 @@ namespace FRC_Holo.API
 
 			foreach (NetworkElement element in this.Children)
 			{
-				Console.WriteLine(element.ToString());
+				for (int i = 0; i < level; i++)
+				{
+					Console.Write("\t");
+				}
+
+				Console.Write(element.ToString() + "\n");
 
 				if(element.Children.Count > 0)
 				{
