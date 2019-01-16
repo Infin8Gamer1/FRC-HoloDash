@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>FRC_HoloServer</RootNamespace>
     <AssemblyName>FRC HoloServer</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -34,27 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FRC.NetworkTables, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FRC.NetworkTables.3.1.8\lib\net46\FRC.NetworkTables.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Nito.AsyncEx.Context, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nito.AsyncEx.Context.1.1.0\lib\net46\Nito.AsyncEx.Context.dll</HintPath>
-    </Reference>
-    <Reference Include="Nito.AsyncEx.Coordination, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nito.AsyncEx.Coordination.1.0.2\lib\net46\Nito.AsyncEx.Coordination.dll</HintPath>
-    </Reference>
-    <Reference Include="Nito.AsyncEx.Tasks, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nito.AsyncEx.Tasks.1.1.0\lib\net46\Nito.AsyncEx.Tasks.dll</HintPath>
-    </Reference>
-    <Reference Include="Nito.Collections.Deque, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nito.Collections.Deque.1.0.0\lib\portable45-net45+win8+wp8+wpa81\Nito.Collections.Deque.dll</HintPath>
-    </Reference>
-    <Reference Include="Nito.Disposables, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nito.Disposables.1.0.0\lib\portable45-net45+win8+wp8+wpa81\Nito.Disposables.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -73,10 +52,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FRC.NetworkTables">
+      <Version>3.1.8</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)Root\*.*" "$(TargetDir)Root\" /Y /D /E</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

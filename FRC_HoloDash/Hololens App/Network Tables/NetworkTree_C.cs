@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NetworkTables;
-using NetworkTables.Tables;
 using Newtonsoft.Json;
 
 namespace FRC_Holo.API
@@ -41,48 +39,6 @@ namespace FRC_Holo.API
 			this.Type = Type;
 			this.Value = Value;
 			this.Children = Children;
-		}
-
-		/// <summary>
-		/// used to make a complete tree of the tables
-		/// </summary>
-		public NetworkElement()
-		{
-			ConstructChildren();
-		}
-
-		private NetworkElement(string Key, string ParentKey, Type Type, object Value)
-		{
-			this.Key = Key;
-			this.ParentKey = ParentKey;
-			this.Type = Type;
-			this.Value = Value;
-			this.Children = new List<NetworkElement>();
-		}
-
-		private NetworkElement(string root, string ParentKey, ITable baseTree)
-		{
-			this.Key = root;
-			this.ParentKey = ParentKey;
-
-			ConstructChildren(root, baseTree);
-		}
-
-		private void ConstructChildren(string root = "", ITable baseTree = null)
-		{
-			Children = new List<NetworkElement>();
-			ITable table = baseTree?.GetSubTable(root) ?? NetworkTable.GetTable(root);
-
-			foreach (string key in table.GetKeys())
-			{
-				Children.Add(new NetworkElement(key, root, NetworkUtil.TypeOf(table.GetValue(key, null)), NetworkUtil.ReadValue(table.GetValue(key, null))));
-			}
-
-			foreach (string key in table.GetSubTables())
-			{
-				//ok being recursive, network tables usually stay fairly small
-				Children.Add(new NetworkElement(key, root, table));
-			}
 		}
 
 		public override string ToString()

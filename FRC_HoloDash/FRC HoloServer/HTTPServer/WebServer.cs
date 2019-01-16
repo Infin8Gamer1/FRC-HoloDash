@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FRC_HoloServer.Server
+namespace FRC_HoloServer
 {
 	public class WebServer
 	{

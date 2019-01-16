@@ -4,10 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using FRC_HoloServer.Server;
 using System.Net;
 using System.IO;
+using FRC_Holo.API;
 
 namespace FRC_HoloServer
 {
@@ -42,7 +41,7 @@ namespace FRC_HoloServer
 
 			Console.WriteLine(responseBody + "\n\n");
 
-			NetworkElement tree = JsonConvert.DeserializeObject<NetworkElement>(responseBody);
+			NetworkElement tree = NetworkUtil.ConvertJSONToNetworkElement(responseBody);
 
 			tree.PrintTable();
 		}

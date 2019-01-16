@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace FRC_HoloServer
+namespace FRC_Holo.API
 {
 	public static class NetworkUtil
 	{
@@ -36,6 +36,11 @@ namespace FRC_HoloServer
 			string myJson = JsonConvert.SerializeObject(tree);
 
 			return myJson;
+		}
+
+		public static NetworkElement ConvertJSONToNetworkElement(string json)
+		{
+			return JsonConvert.DeserializeObject<NetworkElement>(json);
 		}
 
 		/// <summary>
