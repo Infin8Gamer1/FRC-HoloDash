@@ -14,30 +14,24 @@ namespace FRC_HoloServer
 				#region TextWidgets
 				Widget stringTextWidget = new Widget(WidgetType.Text, -2f, 0)
 				{
-					ntType = NtType.String,
 					NetworkKey = "TestingString",
-					NetworkTable = "",
-					Label = "String :"
+					Label = "String"
 				};
 
 				widgets.Add(stringTextWidget);
 
 				Widget numberTextWidget = new Widget(WidgetType.Text, 0, 0)
 				{
-					ntType = NtType.Double,
 					NetworkKey = "TestingDouble",
-					NetworkTable = "",
-					Label = "Double :"
+					Label = "Double"
 				};
 
 				widgets.Add(numberTextWidget);
 
 				Widget boolTextWidget = new Widget(WidgetType.Text, 2f, 0)
 				{
-					ntType = NtType.Boolean,
 					NetworkKey = "TestingBoolean",
-					NetworkTable = "",
-					Label = "Boolean :"
+					Label = "Boolean"
 				};
 
 				widgets.Add(boolTextWidget);
