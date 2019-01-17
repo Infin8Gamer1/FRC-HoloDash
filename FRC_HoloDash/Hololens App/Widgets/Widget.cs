@@ -8,7 +8,7 @@ namespace FRC_HoloServer
 		public Widget(WidgetType _type, float x, float y, float z = 0)
 		{
 			type = _type;
-			Position = new float[3] {Utils.Clamp(x, -2.15f, 2.15f), y, Utils.Clamp(z, -0.5f, 15.0f) };
+			Position = new float[3] {x, y, z};
 
 			NetworkKey = "Default";
 
