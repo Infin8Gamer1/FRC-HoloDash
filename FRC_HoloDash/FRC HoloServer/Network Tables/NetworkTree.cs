@@ -17,10 +17,6 @@ namespace FRC_Holo.API
 		/// </summary>
 		public string Key;
 		/// <summary>
-		/// The Key of the parent
-		/// </summary>
-		public string ParentKey;
-		/// <summary>
 		/// The type of the entry. Can be a primitive type or NetworkTable
 		/// </summary>
 		public Type Type;
@@ -34,10 +30,9 @@ namespace FRC_Holo.API
 		public List<NetworkElement> Children;
 
 		[JsonConstructor]
-		public NetworkElement(string Key, string ParentKey, Type Type, object Value, List<NetworkElement> Children)
+		public NetworkElement(string Key, Type Type, object Value, List<NetworkElement> Children)
 		{
 			this.Key = Key;
-			this.ParentKey = ParentKey;
 			this.Type = Type;
 			this.Value = Value;
 			this.Children = Children;
@@ -51,19 +46,17 @@ namespace FRC_Holo.API
 			ConstructChildren();
 		}
 
-		private NetworkElement(string Key, string ParentKey, Type Type, object Value)
+		private NetworkElement(string Key, Type Type, object Value)
 		{
 			this.Key = Key;
-			this.ParentKey = ParentKey;
 			this.Type = Type;
 			this.Value = Value;
 			this.Children = new List<NetworkElement>();
 		}
 
-		private NetworkElement(string root, string ParentKey, ITable baseTree)
+		private NetworkElement(string root, ITable baseTree)
 		{
 			this.Key = root;
-			this.ParentKey = ParentKey;
 
 			ConstructChildren(root, baseTree);
 		}
@@ -75,19 +68,19 @@ namespace FRC_Holo.API
 
 			foreach (string key in table.GetKeys())
 			{
-				Children.Add(new NetworkElement(key, root, NetworkUtil.TypeOf(table.GetValue(key, null)), NetworkUtil.ReadValue(table.GetValue(key, null))));
+				Children.Add(new NetworkElement(key, NetworkUtil.TypeOf(table.GetValue(key, null)), NetworkUtil.ReadValue(table.GetValue(key, null))));
 			}
 
 			foreach (string key in table.GetSubTables())
 			{
 				//ok being recursive, network tables usually stay fairly small
-				Children.Add(new NetworkElement(key, root, table));
+				Children.Add(new NetworkElement(key, table));
 			}
 		}
 
 		public override string ToString()
 		{
-			return $"{Key} (Type: {Type?.Name}) (Value: {Value?.ToString()}) (Children: {Children?.Count}) (Parent: {ParentKey?.ToString()})";
+			return $"{Key} (Type: {Type?.Name}) (Value: {Value?.ToString()}) (Children: {Children?.Count})";
 		}
 
 		public void PrintTable(int level = 0)

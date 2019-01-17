@@ -5,40 +5,81 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Windows.Web.Http;
 
 namespace FRC_Holo.API
 {
 	public class NetworkUtil
 	{
+		public static NetworkUtil Instance { get; } = new NetworkUtil();
+
 		private NetworkElement tree;
 
-		public void LoadNetworkFromJSON(string json)
+		private HttpClient client;
+
+		public NetworkUtil()
+		{
+			client = new HttpClient();
+
+			tree = null;
+		}
+
+		public async void UpdateNtTable()
+		{
+			LoadNetworkFromJSON(await GetTableJSON());
+		} 
+
+		private void LoadNetworkFromJSON(string json)
 		{
 			tree = JsonConvert.DeserializeObject<NetworkElement>(json);
 		}
 
+		private async Task<string> GetTableJSON()
+		{
+			UriBuilder uri = new UriBuilder("http://localhost:4089/GetNetworkTablesJSON");
+
+			HttpResponseMessage response = await client.GetAsync(uri.Uri);
+			response.EnsureSuccessStatusCode();
+			string responseBody = await response.Content.ReadAsStringAsync();
+
+			return responseBody;
+		}
+
 		public object GetKey(string inputKey)
 		{
-			string[] tokens = inputKey.Split('/');
-
-			NetworkElement myElement = tree;
-			int x = 0;
-
-			while (myElement.Key != tokens.Last())
+			if(tree != null)
 			{
-				var matches = myElement.Children.Where(ntItem => ntItem.Key == tokens[x]);
-				if(matches.Count() > 0 && matches.First() != null)
+				string[] tokens = inputKey.Split('/');
+
+				NetworkElement myElement = tree;
+				int x = 0;
+
+				while (myElement.Key != tokens.Last())
 				{
-					myElement = matches.First();
-				} else {
-					throw new Exception($"Key {tokens[x]} Not Found!");
+					var matches = myElement.Children.Where(ntItem => ntItem.Key == tokens[x]);
+					if (matches.Count() > 0 && matches.First() != null)
+					{
+						myElement = matches.First();
+					}
+					else
+					{
+						throw new Exception($"Key {tokens[x]} Not Found!");
+					}
+
+					x++;
+
 				}
 
-				x++;
-				
+				return myElement.Value;
+			} else {
+				return null;
 			}
+			
+		}
 
-			return myElement.Value;
+		public void Shutdown()
+		{
+			client.Dispose();
 		}
 	}
 }

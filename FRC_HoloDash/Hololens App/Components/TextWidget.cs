@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FRC_Holo.API;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,8 +15,6 @@ namespace FRC_HoloServer
 	{
 		public Text3D Text;
 
-		public NtType ValueType;
-		public string Table;
 		public string Key;
 		public string Label;
 
@@ -38,35 +37,8 @@ namespace FRC_HoloServer
 		{
 			base.OnUpdate(timeStep);
 
-			string value = "Error Type Not Implemented";
-
-			switch (ValueType)
-			{
-				case NtType.Unassigned:
-					break;
-				case NtType.Boolean:
-					value = "Boolean";
-					break;
-				case NtType.Double:
-					value = "Double";
-					break;
-				case NtType.String:
-					value = "String";
-					break;
-				case NtType.Raw:
-					break;
-				case NtType.BooleanArray:
-					break;
-				case NtType.DoubleArray:
-					break;
-				case NtType.StringArray:
-					break;
-				case NtType.Rpc:
-					break;
-				default:
-					break;
-			}
-
+			string value = NetworkUtil.Instance.GetKey(Key).ToString();
+			
 			Text.Text = Label + ": " + value;
 		}
 

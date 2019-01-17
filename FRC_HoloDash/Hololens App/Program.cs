@@ -6,6 +6,7 @@ using Urho.SharpReality;
 using Urho.Shapes;
 using Urho.Gui;
 using System.Collections.Generic;
+using FRC_Holo.API;
 
 namespace FRC_HoloServer
 {
@@ -43,11 +44,12 @@ namespace FRC_HoloServer
 					{"Disable Tag Along", DisableTagAlong }
 				});
 
-			// Create a node for the Hud
+			// Create a node for the Hud and add components to it
 			HUDNode = Scene.CreateChild();
-			//HUDNode.Position = new Vector3(0, 0, 1); // One meter away from the center
 
 			HUDNode.CreateComponent<WidgetManager>();
+
+			HUDNode.CreateComponent<NetworkManager>();
 
 			TagAlong tagAlong = HUDNode.CreateComponent<TagAlong>();
 			tagAlong.LeftCamera = LeftCamera.Node;
@@ -133,6 +135,7 @@ namespace FRC_HoloServer
 		protected override void Stop()
 		{
 			base.Stop();
+			NetworkUtil.Instance.Shutdown();
 		}
 	}
 }

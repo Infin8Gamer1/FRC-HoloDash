@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Components\TextWidget.cs" />
     <Compile Include="Components\TagAlong.cs" />
+    <Compile Include="Components\NetworkManager.cs" />
     <Compile Include="Network Tables\NetworkTree_C.cs" />
     <Compile Include="Network Tables\NetworkUtil_C.cs" />
     <Compile Include="Program.cs" />

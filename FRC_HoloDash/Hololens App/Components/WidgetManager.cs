@@ -80,8 +80,6 @@ namespace FRC_HoloServer
 					//Text Widget Display
 					TextWidget textWidget = widgetNode.CreateComponent<TextWidget>();
 					textWidget.Text = text;
-					textWidget.ValueType = widget.ntType;
-					textWidget.Table = widget.NetworkTable;
 					textWidget.Key = widget.NetworkKey;
 					textWidget.Label = widget.Label;
 
