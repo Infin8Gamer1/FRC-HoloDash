@@ -14,8 +14,8 @@ namespace FRC_HoloServer
 	{
 		[MTAThread]
 		static void Main() => CoreApplication.Run(
-			new UrhoAppViewSource<HoloDashApp>(new ApplicationOptions("Data"))
-		);
+			new UrhoAppViewSource<HoloDashApp>(
+				new ApplicationOptions("Data")));
 	}
 
 	public class HoloDashApp : StereoApplication
@@ -29,7 +29,7 @@ namespace FRC_HoloServer
 
 		protected override async void Start()
 		{
-			//base.Start() creates a basic scene
+			// base.Start() creates a basic scene
 			base.Start();
 
 			//register cortana commands
