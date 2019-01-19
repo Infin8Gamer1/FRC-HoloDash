@@ -58,6 +58,15 @@ namespace FRC_Holo.API
 		public static string ConvertTableToJSON()
 		{
 			NetworkElement tree = new NetworkElement();
+			
+			/*//filter out camera publisher as it is heckin big
+			foreach (NetworkElement element in tree.Children)
+			{
+				if(element.Key == "CameraPublisher")
+				{
+					tree.Children.Remove(element);
+				}
+			}*/
 
 			string myJson = JsonConvert.SerializeObject(tree);
 

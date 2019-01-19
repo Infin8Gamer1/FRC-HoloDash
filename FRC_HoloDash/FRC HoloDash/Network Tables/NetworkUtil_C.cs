@@ -11,7 +11,15 @@ namespace FRC_Holo.API
 {
 	public class NetworkUtil
 	{
-		public static NetworkUtil Instance { get; } = new NetworkUtil();
+		private static NetworkUtil instance = null;
+
+		public static NetworkUtil GetInstance() {
+			if (instance == null)
+			{
+				instance = new NetworkUtil();
+			}
+			return instance;
+		}
 
 		private NetworkElement tree;
 
@@ -31,12 +39,12 @@ namespace FRC_Holo.API
 
 		private void LoadNetworkFromJSON(string json)
 		{
-			tree = JsonConvert.DeserializeObject<NetworkElement>(json);
+			this.tree = JsonConvert.DeserializeObject<NetworkElement>(json);
 		}
 
 		private async Task<string> GetTableJSON()
 		{
-			UriBuilder uri = new UriBuilder("http://localhost:4089/GetNetworkTablesJSON");
+			UriBuilder uri = new UriBuilder("http://infinitepc:4089/GetNetworkTablesJSON");
 
 			HttpResponseMessage response = await client.GetAsync(uri.Uri);
 			response.EnsureSuccessStatusCode();

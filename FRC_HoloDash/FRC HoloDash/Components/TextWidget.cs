@@ -37,7 +37,7 @@ namespace FRC_HoloServer
 		{
 			base.OnUpdate(timeStep);
 
-			string value = NetworkUtil.Instance.GetKey(Key).ToString();
+			string value = NetworkUtil.GetInstance().GetKey(Key)?.ToString();
 			
 			Text.Text = Label + ": " + value;
 		}

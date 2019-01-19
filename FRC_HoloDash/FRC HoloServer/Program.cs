@@ -14,9 +14,9 @@ namespace FRC_HoloServer
 	{
 		static void Main(string[] args)
 		{
-			NetworkUtil.InitNetworkTable(0);
+			NetworkUtil.InitNetworkTable(4089);
 
-			WebServer ws = new WebServer(SendNetworkTableJSON, "http://localhost:4089/GetNetworkTablesJSON/");
+			WebServer ws = new WebServer(SendNetworkTableJSON, "http://*:4089/GetNetworkTablesJSON/");
 			ws.Run();
 			Console.WriteLine("A simple webserver running on port 4089.");
 			Console.ReadKey();
@@ -35,7 +35,7 @@ namespace FRC_HoloServer
 		{
 
 			HttpClient client = new HttpClient();
-			HttpResponseMessage response = await client.GetAsync("http://localhost:4089/GetNetworkTablesJSON");
+			HttpResponseMessage response = await client.GetAsync("http://infinitepc:4089/GetNetworkTablesJSON");
 			response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
 

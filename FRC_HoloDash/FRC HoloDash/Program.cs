@@ -135,7 +135,7 @@ namespace FRC_HoloServer
 		protected override void Stop()
 		{
 			base.Stop();
-			NetworkUtil.Instance.Shutdown();
+			NetworkUtil.GetInstance().Shutdown();
 		}
 	}
 }

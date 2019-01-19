@@ -21,7 +21,7 @@ namespace FRC_HoloServer
 			ReceiveSceneUpdates = true;
 		}
 
-		public const float timeBetweenUpdates = 0.3f;
+		public const float timeBetweenUpdates = 1f;
 		private float countdown;
 
 		//called when the component is attached to some node
@@ -47,7 +47,7 @@ namespace FRC_HoloServer
 			if (countdown <= 0)
 			{
 				countdown = timeBetweenUpdates;
-				NetworkUtil.Instance.UpdateNtTable();
+				NetworkUtil.GetInstance().UpdateNtTable();
 			}
 		}
 
