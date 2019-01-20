@@ -19,8 +19,8 @@ namespace FRC_HoloServer
 			WebServer ws = new WebServer(SendNetworkTableJSON, "http://*:4089/GetNetworkTablesJSON/");
 			ws.Run();
 			Console.WriteLine("A simple webserver running on port 4089.");
-			Console.ReadKey();
-			Test();
+			//Console.ReadKey();
+			//Test();
 			Console.WriteLine("Press any key to quit.exe");
 			Console.ReadKey();
 			ws.Stop();

@@ -23,15 +23,6 @@ namespace FRC_HoloServer
 		// user defined properties (managed state): 
 		public WidgetGrid Grid { get; set; }
 
-		/*public override void OnSerialize(IComponentSerializer ser) {
-			// register our properties with their names as keys using nameof()
-			ser.Serialize(nameof(Grid), Grid);
-		}
-
-		public override void OnDeserialize(IComponentDeserializer des) {
-			Grid = des.Deserialize<WidgetGrid>(nameof(Grid));
-		}*/
-
 		//called when the component is attached to some node
 		public override void OnAttachedToNode(Node _node) {
 			Init();

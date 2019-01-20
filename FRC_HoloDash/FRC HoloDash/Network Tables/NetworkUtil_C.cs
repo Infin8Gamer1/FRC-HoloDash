@@ -1,24 +1,47 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Web.Http;
+using Windows.Web.Http.Filters;
 
 namespace FRC_Holo.API
 {
 	public class NetworkUtil
 	{
 		private static NetworkUtil instance = null;
+		private static readonly Object instanceLock = new object();
 
 		public static NetworkUtil GetInstance() {
-			if (instance == null)
+			lock (instanceLock)
 			{
-				instance = new NetworkUtil();
+				if (instance == null)
+				{
+					instance = new NetworkUtil();
+				}
+
+				return instance;
 			}
-			return instance;
+		}
+
+		public EventHandler<NetworkUpdatedEvent> networkUpdatedHandler;
+
+		protected virtual void OnRaiseNetworkUpdatedEvent(NetworkUpdatedEvent e)
+		{
+			// Make a temporary copy of the event to avoid possibility of
+			// a race condition if the last subscriber unsubscribes
+			// immediately after the null check and before the event is raised.
+			EventHandler<NetworkUpdatedEvent> handler = networkUpdatedHandler;
+
+			// Event will be null if there are no subscribers
+			if (handler != null)
+			{
+				// Format the string to send inside the CustomEventArgs parameter
+				e.message += $" at {DateTime.Now}";
+
+				// Use the () operator to raise the event.
+				handler(this, e);
+			}
 		}
 
 		private NetworkElement tree;
@@ -27,7 +50,12 @@ namespace FRC_Holo.API
 
 		public NetworkUtil()
 		{
-			client = new HttpClient();
+			HttpBaseProtocolFilter RootFilter = new HttpBaseProtocolFilter();
+
+			RootFilter.CacheControl.ReadBehavior = HttpCacheReadBehavior.NoCache;
+			RootFilter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;
+
+			client = new HttpClient(RootFilter);
 
 			tree = null;
 		}
@@ -35,26 +63,41 @@ namespace FRC_Holo.API
 		public async void UpdateNtTable()
 		{
 			LoadNetworkFromJSON(await GetTableJSON());
+
+			OnRaiseNetworkUpdatedEvent(new NetworkUpdatedEvent(""));
 		} 
 
 		private void LoadNetworkFromJSON(string json)
 		{
-			this.tree = JsonConvert.DeserializeObject<NetworkElement>(json);
+			if(json != null && json != "")
+			{
+				tree = JsonConvert.DeserializeObject<NetworkElement>(json);
+			}
 		}
 
 		private async Task<string> GetTableJSON()
 		{
-			UriBuilder uri = new UriBuilder("http://infinitepc:4089/GetNetworkTablesJSON");
+			try
+			{
+				UriBuilder uri = new UriBuilder("http://infinitepc:4089/GetNetworkTablesJSON");
 
-			HttpResponseMessage response = await client.GetAsync(uri.Uri);
-			response.EnsureSuccessStatusCode();
-			string responseBody = await response.Content.ReadAsStringAsync();
+				HttpResponseMessage response = await client.GetAsync(uri.Uri);
+				response.EnsureSuccessStatusCode();
+				string responseBody = await response.Content.ReadAsStringAsync();
 
-			return responseBody;
+				return responseBody;
+			} catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+
+			return null;
+			
 		}
 
 		public object GetKey(string inputKey)
 		{
+
 			if(tree != null)
 			{
 				string[] tokens = inputKey.Split('/');
@@ -65,13 +108,19 @@ namespace FRC_Holo.API
 				while (myElement.Key != tokens.Last())
 				{
 					var matches = myElement.Children.Where(ntItem => ntItem.Key == tokens[x]);
-					if (matches.Count() > 0 && matches.First() != null)
+
+					try
 					{
-						myElement = matches.First();
-					}
-					else
-					{
-						throw new Exception($"Key {tokens[x]} Not Found!");
+						if (matches.Count() > 0 && matches.First() != null)
+						{
+							myElement = matches.First();
+						}
+						else
+						{
+							throw new Exception($"Key {tokens[x]} Not Found!");
+						}
+					} catch (Exception e) {
+						Console.WriteLine(e.Message);
 					}
 
 					x++;
@@ -89,5 +138,15 @@ namespace FRC_Holo.API
 		{
 			client.Dispose();
 		}
+	}
+
+	public class NetworkUpdatedEvent : EventArgs
+	{
+		public NetworkUpdatedEvent(string s)
+		{
+			message = s;
+		}
+
+		public string message;
 	}
 }

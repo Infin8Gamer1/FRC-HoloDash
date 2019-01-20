@@ -24,19 +24,19 @@ namespace FRC_HoloServer
 		}
 
 		public TextWidget() {
-			ReceiveSceneUpdates = true;
+			ReceiveSceneUpdates = false;
 		}
 
 		//called when the component is attached to some node
 		public override void OnAttachedToNode(Node _node)
 		{
+			//subscribe to the network updated ring of trust
+			NetworkUtil.GetInstance().networkUpdatedHandler += OnNetworkUpdate;
 		}
 
 		//update method
-		protected override void OnUpdate(float timeStep)
+		private void OnNetworkUpdate(object sender, NetworkUpdatedEvent e)
 		{
-			base.OnUpdate(timeStep);
-
 			string value = NetworkUtil.GetInstance().GetKey(Key)?.ToString();
 			
 			Text.Text = Label + ": " + value;

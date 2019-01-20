@@ -59,14 +59,14 @@ namespace FRC_Holo.API
 		{
 			NetworkElement tree = new NetworkElement();
 			
-			/*//filter out camera publisher as it is heckin big
-			foreach (NetworkElement element in tree.Children)
+			//filter out camera publisher as it is heckin big
+			for (int i = 0; i < tree.Children.Count; i++)
 			{
-				if(element.Key == "CameraPublisher")
+				if(tree.Children.ElementAt(i).Key == "CameraPublisher")
 				{
-					tree.Children.Remove(element);
+					tree.Children.RemoveAt(i);
 				}
-			}*/
+			}
 
 			string myJson = JsonConvert.SerializeObject(tree);
 

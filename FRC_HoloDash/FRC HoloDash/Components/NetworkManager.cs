@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Urho;
-using Urho.Gui;
-using Urho.Resources;
 using FRC_Holo.API;
 
 namespace FRC_HoloServer
@@ -18,11 +13,11 @@ namespace FRC_HoloServer
 		}
 
 		public NetworkManager() {
-			ReceiveSceneUpdates = true;
 		}
 
-		public const float timeBetweenUpdates = 1f;
-		private float countdown;
+		public bool active;
+
+		public const int timeBetweenUpdatesMS = 200;
 
 		//called when the component is attached to some node
 		public override void OnAttachedToNode(Node _node) {
@@ -32,29 +27,29 @@ namespace FRC_HoloServer
 		//init method
 		public void Init()
 		{
-			ReceiveSceneUpdates = true;
+			active = true;
 
-			countdown = timeBetweenUpdates;
-		}
-
-		//update method
-		protected override void OnUpdate(float timeStep)
-		{
-			base.OnUpdate(timeStep);
-
-			countdown -= timeStep;
-
-			if (countdown <= 0)
+			Action action = () =>
 			{
-				countdown = timeBetweenUpdates;
-				NetworkUtil.GetInstance().UpdateNtTable();
-			}
+				while (active)
+				{
+					Task.Delay(timeBetweenUpdatesMS);
+					
+
+					NetworkUtil.GetInstance().UpdateNtTable();
+				}
+			};
+
+			Task t = new Task(action);
+			t.Start();
 		}
 
 		//delete method
 		protected override void OnDeleted()
 		{
 			base.OnDeleted();
+
+			active = false;
 		}
 	}
 }

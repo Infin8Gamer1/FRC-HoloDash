@@ -13,7 +13,7 @@ namespace FRC_HoloServer
 	internal class Program
 	{
 		[MTAThread]
-		static void Main() => CoreApplication.Run(
+		static void Main() =>  CoreApplication.Run(
 			new UrhoAppViewSource<HoloDashApp>(
 				new ApplicationOptions("Data")));
 	}
@@ -23,7 +23,7 @@ namespace FRC_HoloServer
 		Node HUDNode;
 
 		// For HL optical stabilization (optional)
-		public override Vector3 FocusWorldPoint => HUDNode.WorldPosition;
+		//public override Vector3 FocusWorldPoint => HUDNode.WorldPosition;
 
 		public HoloDashApp(ApplicationOptions opts) : base(opts) { }
 
@@ -129,7 +129,6 @@ namespace FRC_HoloServer
 		protected override void OnUpdate(float timeStep)
 		{
 			base.OnUpdate(timeStep);
-
 		}
 
 		protected override void Stop()
