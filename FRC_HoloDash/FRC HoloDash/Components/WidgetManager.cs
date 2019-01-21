@@ -11,10 +11,6 @@ namespace FRC_HoloClient
 {
 	class WidgetManager : Component
 	{
-		// Constructor needed for deserialization 
-		public WidgetManager(IntPtr handle) : base(handle) {
-			
-		}
 
 		public WidgetManager() {
 			
