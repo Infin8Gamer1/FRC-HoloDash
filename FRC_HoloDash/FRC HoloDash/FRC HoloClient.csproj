@@ -50,6 +50,7 @@
     <Compile Include="Components\NetworkManager.cs" />
     <Compile Include="Components\TagAlong.cs" />
     <Compile Include="Components\CameraWidget.cs" />
+    <Compile Include="Components\StatusWidget.cs" />
     <Compile Include="Components\TextWidget.cs" />
     <Compile Include="Components\WidgetManager.cs" />
     <Compile Include="Network Tables\NetworkTree_C.cs" />
