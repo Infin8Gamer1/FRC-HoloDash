@@ -57,29 +57,42 @@ namespace FRC_HoloClient
 			Urho.Shapes.Plane plane = backgroundPlaneNode.CreateComponent<Urho.Shapes.Plane>();
 			plane.SetMaterial(Material.FromColor(new Color(0.6f, 0.6f, 0.6f, 0.5f)));
 
+			//Text Component
+			Text3D text = widgetNode.CreateComponent<Text3D>();
+			text.HorizontalAlignment = HorizontalAlignment.Center;
+			text.VerticalAlignment = VerticalAlignment.Center;
+			text.SetFont(CoreAssets.Fonts.AnonymousPro, 12);
+			text.SetColor(Color.Red);
+			text.Text = "LOADING...";
+
 			switch (widget.type)
 			{
 				case WidgetType.Text:
-					//Text Component
-					Text3D text = widgetNode.CreateComponent<Text3D>();
-					text.HorizontalAlignment = HorizontalAlignment.Center;
-					text.VerticalAlignment = VerticalAlignment.Center;
-					text.SetFont(CoreAssets.Fonts.AnonymousPro, 12);
-					text.SetColor(Color.Red);
-					text.Text = "LOADING...";
-
 					//Text Widget Display
 					TextWidget textWidget = widgetNode.CreateComponent<TextWidget>();
 					textWidget.Text = text;
 					textWidget.Key = widget.NetworkKey;
 					textWidget.Label = widget.Label;
-
 					break;
 				case WidgetType.Camera:
+					//remove text
+					text.Remove();
+
 					//Camera Widget
 					CameraWidget cameraWidget = widgetNode.CreateComponent<CameraWidget>();
 					cameraWidget.plane = plane;
 					cameraWidget.URL = widget.NetworkKey;
+					break;
+				case WidgetType.Status:
+					//adjust the size of the background plane
+					backgroundPlaneNode.Scale = new Vector3(0.5f, 0.25f, 1f);
+
+					//Status Widget
+					StatusWidget statusWidget = widgetNode.CreateComponent<StatusWidget>();
+					statusWidget.plane = plane;
+					statusWidget.Text = text;
+					statusWidget.Label = widget.Label;
+					statusWidget.Key = widget.NetworkKey;
 					break;
 			}
 

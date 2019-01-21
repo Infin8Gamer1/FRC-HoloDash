@@ -46,6 +46,16 @@ namespace FRC_HoloClient
 
 				widgets.Add(cameraWidget);
 				#endregion
+
+				#region StatusWidgets
+				Widget statusWidget = new Widget(WidgetType.Status, 0f, -2f)
+				{
+					NetworkKey = "Status",
+					Label = "Robot Status"
+				};
+
+				widgets.Add(statusWidget);
+				#endregion
 			}
 		}
 	}

@@ -26,6 +26,7 @@ namespace FRC_HoloClient
 	public enum WidgetType
 	{
 		Text,
-		Camera
+		Camera,
+		Status
 	}
 }
