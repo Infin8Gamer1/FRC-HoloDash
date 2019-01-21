@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Urho;
 using FRC_Holo.API;
 
-namespace FRC_HoloServer
+namespace FRC_HoloClient
 {
 	class NetworkManager : Component
 	{

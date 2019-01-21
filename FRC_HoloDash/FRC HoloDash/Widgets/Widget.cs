@@ -1,6 +1,6 @@
 ﻿
 
-namespace FRC_HoloServer
+namespace FRC_HoloClient
 {
 
 	public struct Widget

@@ -7,7 +7,7 @@ using Urho;
 using Urho.Gui;
 using Urho.Resources;
 
-namespace FRC_HoloServer
+namespace FRC_HoloClient
 {
 	class WidgetManager : Component
 	{
@@ -66,7 +66,7 @@ namespace FRC_HoloServer
 					text.VerticalAlignment = VerticalAlignment.Center;
 					text.SetFont(CoreAssets.Fonts.AnonymousPro, 12);
 					text.SetColor(Color.Red);
-					text.Text = "Testing 123";
+					text.Text = "LOADING...";
 
 					//Text Widget Display
 					TextWidget textWidget = widgetNode.CreateComponent<TextWidget>();
@@ -76,16 +76,14 @@ namespace FRC_HoloServer
 
 					break;
 				case WidgetType.Camera:
+					//Camera Widget
+					CameraWidget cameraWidget = widgetNode.CreateComponent<CameraWidget>();
+					cameraWidget.plane = plane;
+					cameraWidget.URL = widget.NetworkKey;
 					break;
 			}
 
 			Node.AddChild(widgetNode);
-		}
-
-		//update method
-		protected override void OnUpdate(float timeStep)
-		{
-			base.OnUpdate(timeStep);
 		}
 
 		//delete method

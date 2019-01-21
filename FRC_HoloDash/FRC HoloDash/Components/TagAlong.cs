@@ -8,7 +8,7 @@ using Urho.Gui;
 using Urho.Physics;
 using Urho.Resources;
 
-namespace FRC_HoloServer
+namespace FRC_HoloClient
 {
 	class TagAlong : Component
 	{

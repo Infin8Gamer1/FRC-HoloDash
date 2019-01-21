@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FRC_HoloServer
+namespace FRC_HoloClient
 {
 	public class WidgetGrid
 	{
@@ -36,6 +36,16 @@ namespace FRC_HoloServer
 
 				widgets.Add(boolTextWidget);
 				#endregion TextWidgets
+
+				#region CameraWidgets
+				Widget cameraWidget = new Widget(WidgetType.Camera, 0f, 2f)
+				{
+					NetworkKey = "http://127.0.0.1:8080/",
+					Label = "Image.exe"
+				};
+
+				widgets.Add(cameraWidget);
+				#endregion
 			}
 		}
 	}

@@ -9,7 +9,7 @@ using Urho.Gui;
 using Urho.Physics;
 using Urho.Resources;
 
-namespace FRC_HoloServer
+namespace FRC_HoloClient
 {
 	class TextWidget : Component
 	{
@@ -18,13 +18,7 @@ namespace FRC_HoloServer
 		public string Key;
 		public string Label;
 
-		// Constructor needed for deserialization 
-		public TextWidget(IntPtr handle) : base(handle) {
-			
-		}
-
 		public TextWidget() {
-			ReceiveSceneUpdates = false;
 		}
 
 		//called when the component is attached to some node
@@ -39,13 +33,7 @@ namespace FRC_HoloServer
 		{
 			string value = NetworkUtil.GetInstance().GetKey(Key)?.ToString();
 			
-			Text.Text = Label + ": " + value;
-		}
-
-		//delete method
-		protected override void OnDeleted()
-		{
-			base.OnDeleted();
+			Text.Text = Label + "\n" + value;
 		}
 	}
 }

@@ -8,7 +8,7 @@ using Urho.Gui;
 using System.Collections.Generic;
 using FRC_Holo.API;
 
-namespace FRC_HoloServer
+namespace FRC_HoloClient
 {
 	internal class Program
 	{
