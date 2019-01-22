@@ -23,9 +23,11 @@ namespace FRC_HoloClient
 
 		private MjpegDecoder mjpegDecoder;
 
-		public CameraWidget()
+		public CameraWidget(string URL, Urho.Shapes.Plane plane)
 		{
-			ReceiveSceneUpdates = true;
+			ReceiveSceneUpdates = false;
+			this.URL = URL;
+			this.plane = plane;
 		}
 
 		//called when the component is attached to some node

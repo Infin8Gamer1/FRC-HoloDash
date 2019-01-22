@@ -75,20 +75,16 @@ namespace FRC_HoloClient
 					text.Remove();
 
 					//Camera Widget
-					CameraWidget cameraWidget = widgetNode.CreateComponent<CameraWidget>();
-					cameraWidget.plane = plane;
-					cameraWidget.URL = widget.NetworkKey;
+					CameraWidget cameraWidget = new CameraWidget(widget.NetworkKey, plane);
+					widgetNode.AddComponent(cameraWidget);
 					break;
 				case WidgetType.Status:
 					//adjust the size of the background plane
-					backgroundPlaneNode.Scale = new Vector3(0.5f, 0.25f, 1f);
+					backgroundPlaneNode.Scale = new Vector3(0.5f, 1f, 0.25f);
 
 					//Status Widget
-					StatusWidget statusWidget = widgetNode.CreateComponent<StatusWidget>();
-					statusWidget.plane = plane;
-					statusWidget.Text = text;
-					statusWidget.Label = widget.Label;
-					statusWidget.Key = widget.NetworkKey;
+					StatusWidget statusWidget = new StatusWidget(text, plane, widget.NetworkKey, widget.Label);
+					widgetNode.AddComponent(statusWidget);
 					break;
 			}
 

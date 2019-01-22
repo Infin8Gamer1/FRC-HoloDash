@@ -19,7 +19,11 @@ namespace FRC_HoloClient
 		public string Key;
 		public string Label;
 
-		public StatusWidget() {
+		public StatusWidget(Text3D text, Urho.Shapes.Plane plane, string key, string label) {
+			this.Text = text;
+			this.plane = plane;
+			this.Key = key;
+			this.Label = label;
 		}
 
 		//called when the component is attached to some node
