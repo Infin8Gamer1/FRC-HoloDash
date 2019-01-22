@@ -79,7 +79,7 @@ namespace FRC_Holo.API
 		{
 			try
 			{
-				UriBuilder uri = new UriBuilder("http://infinitepc:4089/GetNetworkTablesJSON");
+				UriBuilder uri = new UriBuilder("http://infinitepc:4089/GetNetworkTablesJSON/");
 
 				HttpResponseMessage response = await client.GetAsync(uri.Uri);
 				response.EnsureSuccessStatusCode();

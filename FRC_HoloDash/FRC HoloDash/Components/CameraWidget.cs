@@ -33,15 +33,15 @@ namespace FRC_HoloClient
 		//called when the component is attached to some node
 		public override void OnAttachedToNode(Node _node)
 		{
-			mjpegDecoder = new MjpegDecoder();
+			/*mjpegDecoder = new MjpegDecoder();
 			mjpegDecoder.FrameReady += Mjpeg_FrameReady;
 			//start parsing
-			mjpegDecoder.ParseStream(new Uri(URL));
+			mjpegDecoder.ParseStream(new Uri(URL));*/
 		}
 
 		private async void Mjpeg_FrameReady(object sender, FrameReadyEventArgs e)
 		{
-			MemoryStream memoryStream = new MemoryStream();
+			/*MemoryStream memoryStream = new MemoryStream();
 			await memoryStream.WriteAsync(e.FrameBuffer.ToArray(), 0, Convert.ToInt32(e.FrameBuffer.Length));
 
 			MemoryBuffer mb = new MemoryBuffer(memoryStream);
@@ -52,7 +52,7 @@ namespace FRC_HoloClient
 			var material = new Material();
 			material.SetTexture(TextureUnit.Diffuse, texture);
 			material.SetTechnique(0, CoreAssets.Techniques.Diff);
-			plane.SetMaterial(material);
+			plane.SetMaterial(material);*/
 		}
 
 	}

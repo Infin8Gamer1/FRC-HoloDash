@@ -33,7 +33,7 @@ namespace FRC_HoloClient
 		{
 			string value = NetworkUtil.GetInstance().GetKey(Key)?.ToString();
 			
-			Text.Text = Label + "\n" + value;
+			Text.Text = Label + ": " + value;
 		}
 	}
 }
