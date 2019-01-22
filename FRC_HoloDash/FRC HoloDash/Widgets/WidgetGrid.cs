@@ -40,7 +40,7 @@ namespace FRC_HoloClient
 				#region CameraWidgets
 				Widget cameraWidget = new Widget(WidgetType.Camera, 0f, 2f)
 				{
-					NetworkKey = "http://127.0.0.1:8080/",
+					NetworkKey = "http://roborio-4089-frc.local:1181/?action=stream",
 					Label = "Image.exe"
 				};
 

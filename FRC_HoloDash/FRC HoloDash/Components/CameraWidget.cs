@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 using Urho;
 using Urho.Gui;
 using Urho.Physics;
+using System.IO;
 using Urho.Resources;
+using MjpegProcessor;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Urho.Urho2D;
 
 namespace FRC_HoloClient
 {
@@ -17,6 +21,8 @@ namespace FRC_HoloClient
 
 		public string URL;
 
+		private MjpegDecoder mjpegDecoder;
+
 		public CameraWidget()
 		{
 			ReceiveSceneUpdates = true;
@@ -25,14 +31,27 @@ namespace FRC_HoloClient
 		//called when the component is attached to some node
 		public override void OnAttachedToNode(Node _node)
 		{
-			plane.SetMaterial(Material.FromImage("Earth.jpg"));
+			mjpegDecoder = new MjpegDecoder();
+			mjpegDecoder.FrameReady += Mjpeg_FrameReady;
+			//start parsing
+			mjpegDecoder.ParseStream(new Uri(URL));
 		}
 
-		//update method
-		protected override void OnUpdate(float timeStep)
+		private async void Mjpeg_FrameReady(object sender, FrameReadyEventArgs e)
 		{
-			
-			base.OnUpdate(timeStep);
+			MemoryStream memoryStream = new MemoryStream();
+			await memoryStream.WriteAsync(e.FrameBuffer.ToArray(), 0, Convert.ToInt32(e.FrameBuffer.Length));
+
+			MemoryBuffer mb = new MemoryBuffer(memoryStream);
+
+			Texture2D texture = new Texture2D();
+			texture.Load(mb);
+
+			var material = new Material();
+			material.SetTexture(TextureUnit.Diffuse, texture);
+			material.SetTechnique(0, CoreAssets.Techniques.Diff);
+			plane.SetMaterial(material);
 		}
+
 	}
 }
