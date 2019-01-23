@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine.Networking;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace FRC_Holo.API
 {
@@ -57,12 +58,12 @@ namespace FRC_Holo.API
 				Debug.Log(www.error);
 			} else {
 				// Show results as text
-				Debug.Log(www.downloadHandler.text);
+				//Debug.Log(www.downloadHandler.text);
 				string json = www.downloadHandler.text;
 
 				if (json != null && json != "")
 				{
-					tree = JsonUtility.FromJson<NetworkElement>(json);
+					tree = JsonConvert.DeserializeObject<NetworkElement>(json);
 				}
 
 				OnRaiseNetworkUpdatedEvent(new NetworkUpdatedEvent(tree));

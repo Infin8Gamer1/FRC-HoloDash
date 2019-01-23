@@ -6,11 +6,12 @@ using UnityEngine;
 public class NetworkManager : MonoBehaviour {
 
 	public float timeBetweenUpdatesMS = 100f;
-	private float timeBetween;
+	private float timeBetween = 0.03f;
 
 	// Use this for initialization
 	void Start () {
-		
+		timeBetween = 0.03f;
+		timeBetweenUpdatesMS = timeBetweenUpdatesMS * 0.001f;
 	}
 	
 	// Update is called once per frame
@@ -19,7 +20,7 @@ public class NetworkManager : MonoBehaviour {
 
 		if (timeBetween < 0)
 		{
-			NetworkUtil.GetInstance().UpdateNtTable();
+			StartCoroutine(NetworkUtil.GetInstance().UpdateNtTable());
 			timeBetween = timeBetweenUpdatesMS;
 		}
 	}

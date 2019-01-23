@@ -42,7 +42,7 @@ namespace FRC_HoloClient
 				Widget cameraWidget = new Widget(WidgetType.Camera, 0f, 2f)
 				{
 					//NetworkKey = "http://roborio-4089-frc.local:1181/?action=stream",
-					NetworkKey = "http://infinitepc:1181/?action=stream",
+					NetworkKey = "http://infinitepc:1181/video.cgi",
 					Label = "Image.exe"
 				};
 

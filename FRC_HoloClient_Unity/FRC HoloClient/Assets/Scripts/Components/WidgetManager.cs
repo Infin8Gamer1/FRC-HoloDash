@@ -32,10 +32,10 @@ public class WidgetManager : MonoBehaviour {
 		backgroundPlane.transform.SetParent(widgetGO.transform);
 
 		backgroundPlane.transform.localScale = new Vector3(0.97f, 0.48f, 0.48f);
-		backgroundPlane.transform.localRotation = Quaternion.Euler(-90, 0, 0);
+		backgroundPlane.transform.localRotation = Quaternion.Euler(90, 0, 180);
 		backgroundPlane.transform.localPosition = new Vector3(0, 0, 0.05f);
 
-		Renderer planeRenderer = backgroundPlane.GetComponent<Renderer>();
+		MeshRenderer planeRenderer = backgroundPlane.GetComponent<MeshRenderer>();
 		planeRenderer.material.color = new Color(0.4f, 0.4f, 0.4f, 0.75f);
 
 		//Text Component
@@ -47,27 +47,31 @@ public class WidgetManager : MonoBehaviour {
 		switch (widget.type)
 		{
 			case WidgetType.Text:
-				/*//Text Widget Display
-				TextWidget textWidget = widgetGO.CreateComponent<TextWidget>();
-				textWidget.Text = text;
+				//Text Widget Display
+				TextWidget textWidget = widgetGO.AddComponent<TextWidget>();
+				textWidget.Text = TextGO.GetComponent<TMPro.TextMeshPro>();
 				textWidget.Key = widget.NetworkKey;
-				textWidget.Label = widget.Label;*/
+				textWidget.Label = widget.Label;
 				break;
 			case WidgetType.Camera:
 				//remove text
 				Destroy(TextGO);
 
-				/*//Camera Widget
-				CameraWidget cameraWidget = new CameraWidget(widget.NetworkKey, plane);
-				widgetGO.AddComponent(cameraWidget);*/
+				//Camera Widget
+				WebStream webStream = widgetGO.AddComponent<WebStream>();
+				webStream.sourceURL = widget.NetworkKey;
+				webStream.frame = planeRenderer;
 				break;
 			case WidgetType.Status:
-				/*//adjust the size of the background plane
-				backgroundPlaneNode.Scale = new Vector3(0.5f, 1f, 0.25f);
+				//adjust the size of the background plane
+				backgroundPlane.transform.localScale = new Vector3(0.5f, 0.25f, 0.25f);
 
 				//Status Widget
-				StatusWidget statusWidget = new StatusWidget(text, plane, widget.NetworkKey, widget.Label);
-				widgetGO.AddComponent(statusWidget);*/
+				StatusWidget statusWidget = widgetGO.AddComponent<StatusWidget>();
+				statusWidget.Text = TextGO.GetComponent<TMPro.TextMeshPro>();
+				statusWidget.PlaneRenderer = planeRenderer;
+				statusWidget.Key = widget.NetworkKey;
+				statusWidget.Label = widget.Label;
 				break;
 		}
 
