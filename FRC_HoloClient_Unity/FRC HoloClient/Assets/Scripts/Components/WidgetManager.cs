@@ -66,6 +66,9 @@ public class WidgetManager : MonoBehaviour {
 				//adjust the size of the background plane
 				backgroundPlane.transform.localScale = new Vector3(0.5f, 0.25f, 0.25f);
 
+				TextGO.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 5.0f);
+				TextGO.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 2.5f);
+
 				//Status Widget
 				StatusWidget statusWidget = widgetGO.AddComponent<StatusWidget>();
 				statusWidget.Text = TextGO.GetComponent<TMPro.TextMeshPro>();

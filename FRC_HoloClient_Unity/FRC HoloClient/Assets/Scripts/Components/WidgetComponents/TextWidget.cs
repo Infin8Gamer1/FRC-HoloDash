@@ -15,6 +15,8 @@ public class TextWidget : MonoBehaviour {
 	void Start () {
 		//subscribe to network updates
 		NetworkUtil.GetInstance().networkUpdatedHandler += OnNetworkUpdate;
+
+		Text.text = Label + "\nLoading...";
 	}
 
 	//update method
