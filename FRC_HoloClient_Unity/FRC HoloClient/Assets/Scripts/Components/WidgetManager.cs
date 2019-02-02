@@ -55,7 +55,10 @@ public class WidgetManager : MonoBehaviour {
 				break;
 			case WidgetType.Camera:
 				//remove text
-				Destroy(TextGO);
+				Destroy (TextGO);
+
+				backgroundPlane.transform.localScale = new Vector3(16f/16f, 1, 9f/16f);
+				planeRenderer.material.color = new Color(1f, 1f, 1f, 1f);
 
 				//Camera Widget
 				WebStream webStream = widgetGO.AddComponent<WebStream>();

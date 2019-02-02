@@ -8,7 +8,7 @@ public class WebStream : MonoBehaviour
 {
 
 	public MeshRenderer frame;    //Mesh for displaying video
-	public string sourceURL = "http://infinitepc:1181/video.cgi";
+	public string sourceURL = "http://frc4089pi.local:8081/video.cgi";
 
 	private Texture2D texture;
 	private Stream stream;
@@ -33,7 +33,8 @@ public class WebStream : MonoBehaviour
 	{
 		streamState = WebStreamState.Streaming;
 
-		texture = new Texture2D(2, 2);
+		texture = new Texture2D(2, 2, TextureFormat.RGB24, false);
+
 		// create HTTP request
 		HttpWebRequest req = (HttpWebRequest)WebRequest.Create(sourceURL);
 		//Optional (if authorization is Digest)
@@ -47,7 +48,7 @@ public class WebStream : MonoBehaviour
 
 	IEnumerator GetFrame()
 	{
-		Byte[] JpegData = new Byte[100000];
+		Byte[] JpegData = new Byte[1000000];
 
 		while (true)
 		{
@@ -82,6 +83,7 @@ public class WebStream : MonoBehaviour
 
 			MemoryStream ms = new MemoryStream(JpegData, 0, bytesToRead, false, true);
 
+			//texture.format = TextureFormat.YUY2;
 			texture.LoadImage(ms.GetBuffer());
 			frame.material.mainTexture = texture;
 			stream.ReadByte(); // CR after bytes

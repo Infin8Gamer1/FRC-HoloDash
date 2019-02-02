@@ -14,8 +14,8 @@ namespace FRC_HoloServer
 	{
 		static void Main(string[] args)
 		{
-			//NetworkUtil.InitNetworkTable(4089);
-			NetworkUtil.InitNetworkTable(0);
+			NetworkUtil.InitNetworkTable(4089);
+			//NetworkUtil.InitNetworkTable(0);
 
 			WebServer ws = new WebServer(SendNetworkTableJSON, "http://*:4089/GetNetworkTablesJSON/");
 			ws.Run();
